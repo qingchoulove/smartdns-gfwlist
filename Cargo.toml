@@ -1,0 +1,17 @@
+[package]
+name = "smartdns-gfwlist"
+version = "0.1.0"
+edition = "2021"
+authors = ["ShuangxueWu <wu@kyun.com>"]
+description = "Generate domains list from gfwlist."
+license = "MIT"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = "0.11.14"
+tokio = { version = "1.26.0", features = ["full"] }
+base64 = "0.21.0"
+publicsuffix = "1"
+clap = {version = "4.1.8", features = ["derive"]}
