@@ -1,0 +1,29 @@
+name: Build
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: tools
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
+      - run: |
+          target/release/smartdns-gfwlist -g GFW -m smart-dns
+      - run: |
+          git config user.name github-actions
+          git config user.email wu@kyun.me
+          git checkout main
+          git add gfwlist.domain.smartdns.conf
+          git commit -m "generated"
+          git push
